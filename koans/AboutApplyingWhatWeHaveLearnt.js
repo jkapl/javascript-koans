@@ -65,14 +65,13 @@ describe("About Applying What We Have Learnt", function() {
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
     var nums = _.range(1000);
-    console.log(Array.isArray(nums))
+  
     var total = _.reduce(nums,function (memo, x) {
       if (x % 3===0 || x % 5 === 0) {
         return memo + x
       } return memo
     },0)
 
-    console.log(total)
         /* try chaining range() and reduce() */
 
     expect(233168).toBe(total);
@@ -88,15 +87,29 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = { "{ingredient name}": 0 };
-
+    //var ingredientCount = { "{ingredient name}": 0 };
+    var ingredientCount = {};
     /* chain() together map(), flatten() and reduce() */
+   _.chain(products).map(function (elem) { return elem['ingredients'] })
+                                .flatten()
+                                .reduce(function (memo, curVal) { return ingredientCount[curVal] = (ingredientCount[curVal] || 0) + 1 })
+   console.log(ingredientCount['mushrooms'])
+                                
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+   // products = [
+   //     { name: "Sonoma", ingredients: ["artichoke", "sundried tomatoes", "mushrooms"], containsNuts: false },
+   //     { name: "Pizza Primavera", ingredients: ["roma", "sundried tomatoes", "goats cheese", "rosemary"], containsNuts: false },
+   //     { name: "South Of The Border", ingredients: ["black beans", "jalapenos", "mushrooms"], containsNuts: false },
+   //     { name: "Blue Moon", ingredients: ["blue cheese", "garlic", "walnuts"], containsNuts: true },
+   //     { name: "Taste Of Athens", ingredients: ["spinach", "kalamata olives", "sesame seeds"], containsNuts: true }
+   //  ]      
+
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
